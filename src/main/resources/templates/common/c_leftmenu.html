@@ -1,0 +1,44 @@
+<div  th:fragment="leftmenu"  xmlns:th="http://www.thymeleaf.org">
+    <div class="nav-top-box">
+        <div class="nav-logo-box">
+            <img th:src="@{/static/images/logo.png}" src="/static/images/logo.png" alt="">
+        </div>
+        <!--<div class="layui-form nav-select-box" th:if="${session.enterList !=null}">-->
+            <!--<select  id="changeEnter" lay-verify="" lay-filter="nav-select">-->
+                <!--<option th:each="ent,index : ${session.enterList}" th:selected="${ent.enterpriseSeq eq  session.userInfo.enterpriseSeq}"  th:value="${ent.enterpriseSeq}" th:text="${ent.companyName}"></option>-->
+            <!--</select>-->
+        <!--</div>-->
+        <!--<div class="layui-form nav-select-box" th:if="${session.enterList ==null}">-->
+        <!--<select name="city" lay-verify="" lay-filter="nav-select">-->
+            <!--<option selected="selected">当前暂无企业</option>-->
+        <!--</select>-->
+    <!--</div>-->
+        <p class="nav-text">导航列表</p>
+    </div>
+    <ul class="nav-list-box">
+        <li th:if="${session.userType eq '1'}">
+            <a th:class="${session.selectMenu eq 'dzbxkIndex' } ? 'active':''"     href="dzbxkIndex" th:href="@{dzbxkIndex}"> <i class="iconfont">&#xe6a3;</i><span>资金管理</span></a>
+        </li>
+        <li th:if="${session.userType eq '1'}">
+            <a th:class="${session.selectMenu eq 'vipmanageIndex' } ? 'active':''" href="vipmanageIndex" th:href="@{vipmanageIndex}"><i class="iconfont">&#xe6bc;</i><span>账户中心</span></a>
+        </li>
+        <li th:if="${session.userType eq '1'}">
+            <a th:class="${session.selectMenu eq 'enterpriseIndex' } ? 'active':''" href="enterpriseIndex" th:href="@{enterpriseIndex}"><i class="iconfont">&#xe664;</i><span>企业管理</span></a>
+        </li>
+        <li>
+            <a th:class="${session.selectMenu eq 'buyIndex' } ? 'active':''" href="buyIndex" th:href="@{buyIndex}"><i class="iconfont">&#xe629;</i><span>去采购</span></a>
+        </li>
+        <li>
+            <a th:class="${session.selectMenu eq 'orderIndex' } ? 'active':''" href="orderIndex" th:href="@{orderIndex}"><i class="iconfont">&#xe6a3;</i><span>订单管理</span></a>
+        </li>
+        <li>
+            <a th:class="${session.selectMenu eq 'shoppingcarIndex' } ? 'active':''" href="shoppingcarIndex" th:href="@{shoppingcarIndex}"><i class="iconfont">&#xe62a;</i><span>购物车</span></a>
+        </li>
+        <li>
+            <a th:class="${session.selectMenu eq 'invoiceIndex' } ? 'active':''" href="invoiceIndex" th:href="@{invoiceIndex}"><i class="iconfont">&#xe658;</i><span>票据中心</span></a>
+        </li>
+    </ul>
+</div>
+
+
+

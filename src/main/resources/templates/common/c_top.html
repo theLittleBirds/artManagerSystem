@@ -1,0 +1,27 @@
+<div th:fragment="top"  xmlns:th="http://www.thymeleaf.org">
+    <div class=" enterselect" >
+        <select  id="changeEnter"  th:if="${session.enterList !=null}" >
+            <option th:each="ent,index : ${session.enterList}" th:selected="${ent.enterpriseSeq eq  session.userInfo.enterpriseSeq}"  th:value="${ent.enterpriseSeq}" th:text="${ent.companyName}"></option>
+        </select>
+        <select name="city" th:if="${session.enterList ==null}" lay-verify="" lay-filter="nav-select">
+            <option selected="selected">当前暂无企业</option>
+        </select>
+    </div>
+    <!--<div class="layui-form nav-select-box enterselect">-->
+        <!--<input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">-->
+    <!--</div>-->
+
+    <div class="header-user-box">
+        <a href="javascript:void(0);" th:onclick="|shoppingCar()|">
+             <i class="iconfont icon-car" style="color: #5e84ff;font-size: 30px;">&#xe62a;</i>
+             <span>购物车（<span style="color: #ffc059" th:text="${session.countCar}"></span>）</span>
+        </a>
+        <span th:text="${session.userInfo.loginName}"></span>
+        <span><a href="/loginout">退出</a></span>
+    </div>
+    <script>
+        function shoppingCar() {
+            window.location.href = "/shoppingcarIndex";
+        }
+    </script>
+</div>

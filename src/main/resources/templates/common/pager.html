@@ -1,0 +1,6 @@
+<div th:fragment="pager"  xmlns:th="http://www.thymeleaf.org">
+    <input type="hidden" id="pageNum" name="pageNum" th:value="${pageNum}">
+    <input type="hidden" id="pageSize" name="pageSize" th:value="${pageSize}">
+    <input type="hidden" id="totalNum" name="totalNum" th:value="${totalNum}">
+    <div id="capital-page" class="ui-capital-page"></div>
+</div>

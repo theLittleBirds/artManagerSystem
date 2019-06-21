@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>企伴侣</title>
+    <script th:src="@{/static/js/lib/jquery.min.js}" src="/static/js/lib/jquery.min.js"></script>
+    <!--layui框架样式-->
+    <link th:href="@{/static/js/lib/layui/css/layui.css}" rel="stylesheet" href="/static/js/lib/layui/css/layui.css">
+    <!--layui js-->
+    <script th:src="@{/static/js/lib/layui/layui.js}" src="/static/js/lib/layui/layui.js"></script>
+    <!--全局公共js-->
+    <script th:src="@{/static/js/global.js}" src="/static/js/global.js"></script>
+
+    <!--私有css、js-->
+    <link rel="stylesheet" th:href="@{/static/css/userPublic.css}" href="/static/css/userPublic.css">
+    <link rel="stylesheet" th:href="@{/static/css/register.css}" href="/static/css/register.css">
+    <script th:src="@{/static/js/lib/Validform_v5.3.2_min.js}" src="/static/js/lib/Validform_v5.3.2_min.js"></script>
+    <script th:src="@{/static/js/forget.js}" src="/static/js/forget.js"></script>
+
+</head>
+<body>
+<div class="user-header">
+    <div class="user-header-con">
+        <img th:src="@{/static/images/logo.png}" src="/static/images/logo.png" alt="">
+        <div class="user-header-btn">
+            <a href="/">返回登录页</a>
+        </div>
+    </div>
+</div>
+<div class="register-box">
+    <div class="register-top">
+        <h3>找回密码</h3>
+        <p>自由工作，高效管理</p>
+    </div>
+
+    <div class="ui-register-form">
+        <form class="layui-form js-forget-form" id="updtepassword" action="/updatepassword" method="post"
+              enctype="multipart/form-data">
+            <!--第一步-->
+            <div class="js-forget-module1">
+                <input type="text" onkeyup="this.value=this.value.replace(/\s+/g,'')" maxlength="20" id="loginname" name="loginname" datatype="*" nullmsg="请输入登录名"
+                       onblur="checkLoginUser()" placeholder="请设置登录名" autocomplete="off"
+                       class="layui-input"/>
+                <input type="text" onkeyup="this.value=this.value.replace(/\s+/g,'')" id="telephone" onblur="checkTel()" name="telephone"
+                       maxlength="11" placeholder="请输入您的手机号" class="layui-input"/>
+                <div class="ui-code-box">
+                    <input type="text" onkeyup="this.value=this.value.replace(/\s+/g,'')" maxlength="6" id="validcode" name="validcode"  autocomplete="off" placeholder="请输入短信验证码" class="layui-input ui-code-input"/>
+                    <span id="getcode" class="ui-code js-getCode3">获取短信验证码</span>
+                </div>
+                <a class="ui-register-btn" onclick="checkUserByNameAndTel()">下一步</a>
+            </div>
+
+            <!--第二步-->
+            <div style="display: none" class="js-forget-module2">
+                <input type="password" onkeyup="this.value=this.value.replace(/\s+/g,'')" id="password" onblur="checkPwd()" name="password" nullmsg="请输入密码" datatype="*6-20"
+                       maxlength="20" errormsg="密码范围在6~20位之间！" placeholder="请设置登录密码" autocomplete="off" class="layui-input">
+                <input type="password" onkeyup="this.value=this.value.replace(/\s+/g,'')" id="password2" onblur="checkPwd2()" name="password2" nullmsg="请再次输入密码" datatype="*" recheck="password"
+                       maxlength="20" errormsg="您两次输入的账号密码不一致！" placeholder="请再次输入登录密码" class="layui-input">
+                <a class="ui-register-btn" href="javascript:void(0);"
+                   th:onclick="'javascript:updatePassword();'">找回密码</a>
+            </div>
+        </form>
+    </div>
+
+</div>
+</body>
+</html>

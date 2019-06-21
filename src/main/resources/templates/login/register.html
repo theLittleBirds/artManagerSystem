@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>企伴侣</title>
+    <script th:src="@{/static/js/lib/jquery.min.js}" src="/static/js/lib/jquery.min.js"></script>
+    <!--layui框架样式-->
+    <link th:href="@{/static/js/lib/layui/css/layui.css}" rel="stylesheet" href="/static/js/lib/layui/css/layui.css">
+    <!--layui js-->
+    <script th:src="@{/static/js/lib/layui/layui.js}" src="/static/js/lib/layui/layui.js"></script>
+    <!--全局公共js-->
+    <script th:src="@{/static/js/global.js}" src="/static/js/global.js"></script>
+
+    <!--私有css、js-->
+    <link rel="stylesheet" th:href="@{/static/css/userPublic.css}" href="/static/css/userPublic.css">
+    <link rel="stylesheet" th:href="@{/static/css/register.css}" href="/static/css/register.css">
+    <script th:src="@{/static/js/lib/Validform_v5.3.2_min.js}" src="/static/js/lib/Validform_v5.3.2_min.js"></script>
+    <script th:src="@{/static/js/register.js}" src="/static/js/register.js"></script>
+</head>
+
+<body>
+<div class="user-header">
+    <div class="user-header-con">
+        <img th:src="@{/static/images/logo.png}" src="/static/images/logo.png" alt="">
+        <div class="user-header-btn">
+            <!--<a href="/updatepass">忘记密码</a>-->
+            <a href="/">返回登录页</a>
+        </div>
+    </div>
+</div>
+<div class="register-box">
+    <div class="register-top">
+        <h3>系统注册</h3>
+        <p>自由工作，高效管理</p>
+        <!--<div class="register-top-btn">-->
+            <!--<a href="javascript:void(0);" class="js-enterprise-btn active">企业注册</a>-->
+            <!--<a href="javascript:void(0);" class="js-personage-btn">注册</a>-->
+        <!--</div>-->
+    </div>
+
+    <!--企业注册-->
+    <div style="display: none" class="ui-register-form js-enterprise-box">
+        <form id="enterpriseregister" class="layui-form js-enterprise-form" action="" method="post"
+              enctype="multipart/form-data">
+            <!--第一步-->
+            <div class="js-register-module1">
+                <input type="text" onkeyup="this.value=this.value.replace(/\s+/g,'')" id="loginname1" name="loginname" maxlength="20" datatype="*" placeholder="请设置登录名"
+                       onblur="checkUserByname()" autocomplete="off" class="layui-input">
+                <input type="password" onkeyup="this.value=this.value.replace(/\s+/g,'')" id="password3" maxlength="20" onblur="checkPwd3()" name="password"
+                       nullmsg="请输入密码"
+                       datatype="*6-20" errormsg="密码范围在6~20位之间！" placeholder="请设置登录密码" autocomplete="off"
+                       class="layui-input">
+                <input type="password" onkeyup="this.value=this.value.replace(/\s+/g,'')" id="password4" maxlength="20" onblur="checkPwd4()" name="password2"
+                       nullmsg="请再次输入密码"
+                       datatype="*" recheck="password" errormsg="您两次输入的账号密码不一致！" placeholder="请再次输入登录密码"
+                       class="layui-input">
+                <input type="text" onkeyup="this.value=this.value.replace(/\s+/g,'')" id="telephone1" name="telephone" maxlength="11" onblur="checkTel1()" datatype="*"
+                       nullmsg="请输入手机号！" errormsg="请输入正确的手机号！"
+                       placeholder="请输入您的手机号" class="layui-input">
+                <div class="ui-code-box">
+                    <input type="text" onkeyup="this.value=this.value.replace(/\s+/g,'')" id="validcode1" datatype="*" nullmsg="请输入短信验证码！" errormsg="请输入短信验证码！"
+                           name="validcode" autocomplete="off"
+                           maxlength="6" placeholder="请输入短信验证码" class="layui-input ui-code-input">
+                    <span class="ui-code js-getCode1">获取短信验证码</span>
+                </div>
+                <div class="layui-form ui-check">
+                    <input datatype="*" onkeyup="this.value=this.value.replace(/\s+/g,'')" errormsg="请同意使用协议！" nullmsg="请同意使用协议！" type="checkbox" name=""
+                           lay-skin="primary" checked>
+                    <p>我已同意<a href="javascript:;">《商户系统用户协议说明》</a></p>
+                </div>
+                <a class="ui-register-btn" th:href="'javascript:validSmsCode1()'">下一步</a>
+            </div>
+
+            <!--第二步-->
+            <div style="display: none" class="js-register-module2">
+                <input type="text" onkeyup="this.value=this.value.replace(/\s+/g,'')" datatype="*" errormsg="请输入企业名称！" onblur="checkEnterpriseName()" nullmsg="请输入企业名称！"
+                       id="enterpriseName" name="enterpriseName"
+                       placeholder="请输入企业名称" class="layui-input">
+                <div class="ui-upload">
+                    <label>
+                        <span>营业执照：</span>
+                        <img class="js-img" th:src="@{/static/images/upload.jpg}" src="/static/images/upload.jpg"
+                             alt="">
+                        <input class="js-file" onkeyup="this.value=this.value.replace(/\s+/g,'')" name="file" datatype="*" errormsg="请上传营业执照！" nullmsg="请上传营业执照！"
+                               type="file" style="display: none">
+                    </label>
+                </div>
+                <input maxlength="18" onkeyup="this.value=this.value.replace(/\s+/g,'')" datatype="/^[A-Za-z0-9]{18}$/" errormsg="请输入正确的营业执照号！" nullmsg="请输入营业执照号！"
+                       type="text" name="enterpriseNo" placeholder="请输入营业执照号" class="layui-input">
+                <a class="ui-register-btn js-register-two" href="javascript:;">下一步</a>
+            </div>
+
+            <!--第三步-->
+            <div style="display: none" class="js-register-module3">
+                <input type="text" onkeyup="this.value=this.value.replace(/\s+/g,'')" minlength="15" maxlength="20" id="accountNo" name="accountNo" placeholder="请输入对公账户"
+                       autocomplete="off" class="layui-input">
+                <div class="ui-location-box">
+                    <span class="ui-label">开户地</span>
+                    <div class="layui-input-inline">
+                        <select nullmsg="请选择省！" datatype="*" errormsg="请选择省！" id="provinceid" name="provinceid"
+                                lay-filter="province-select">
+                        </select>
+                    </div>
+                    <div class="layui-input-inline ui-select">
+                        <select nullmsg="请选择市！" datatype="*" errormsg="请选择市！" id="cityid" name="cityid"
+                                lay-filter="city-select">
+                        </select>
+                    </div>
+                </div>
+                <select nullmsg="请选择开户行！" datatype="*" errormsg="请选择开户行！" id="bankId" name="bankId"
+                        lay-filter="bank-select">
+                </select>
+                <select nullmsg="请选择银行支行（网点）！" datatype="*" errormsg="请选择银行支行（网点）！" id="bankBranch" name="bankBranch">
+                </select>
+                <input name="userType" style="display: none" th:value="1"/>
+                <input name="channelType" style="display: none" th:value="2"/>
+                <input name="authStatus" id="authStatus" style="display: none">
+                <div class="ui-register-submit">
+                    <a class="ui-register-btn js-enterprise-submit"
+                       href="javascript:void(0);" th:href="'javascript:submitRegister(\'1\')'">完成企业注册</a>
+                    <a class="ui-skip-btn"
+                       href="javascript:void(0);" th:href="'javascript:submitRegisterJump(\'0\')'">跳过</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!--企业注册 /-->
+
+    <!--个人注册-->
+    <div class="ui-register-form js-personage-box">
+        <form id="personregister" class="layui-form js-personage-form" action="" method="post">
+            <div>
+                <input type="text" onkeyup="this.value=this.value.replace(/\s+/g,'')" maxlength="20" id="loginname" name="loginname" nullmsg="请输入登录名！" datatype="*"
+                       onblur="checkPersonLoginName()" errormsg="请输入登录名"
+                       placeholder="请设置登录名"
+                       autocomplete="off" class="layui-input"/>
+                <input type="text" onkeyup="this.value=this.value.replace(/\s+/g,'')" maxlength="20" id="username" name="username" nullmsg="请输入您的真实姓名！" datatype="*"
+                       errormsg="请输入您的真实姓名！"
+                       placeholder="请输入您的真实姓名" autocomplete="off" class="layui-input">
+                <input type="password" onkeyup="this.value=this.value.replace(/\s+/g,'')" maxlength="20" id="password" onblur="checkPwd1()" name="password" nullmsg="请输入密码"
+                       datatype="*6-20" errormsg="密码范围在6~20位之间！"
+                       placeholder="请设置登录密码" autocomplete="off" class="layui-input">
+                <input type="password" onkeyup="this.value=this.value.replace(/\s+/g,'')" maxlength="20" id="password2" onblur="checkPwd2()" name="password2"
+                       nullmsg="请再次输入密码"
+                       datatype="*" recheck="password"
+                       errormsg="您两次输入的账号密码不一致！" placeholder="请再次输入登录密码" class="layui-input">
+                <input type="text" onkeyup="this.value=this.value.replace(/\s+/g,'')" maxlength="11" id="telephone2" onblur="checkTel2()" name="telephone" datatype="m"
+                       nullmsg="请输入手机号！"
+                       errormsg="请输入正确的手机号！"
+                       placeholder="请输入您的手机号" class="layui-input">
+                <div class="ui-code-box">
+                    <input type="text" onkeyup="this.value=this.value.replace(/\s+/g,'')" id="validcode2" datatype="*" nullmsg="请输入短信验证码！" errormsg="请输入短信验证码！"
+                           name="validcode"
+                           maxlength="6" autocomplete="off"
+                           placeholder="请输入短信验证码" class="layui-input ui-code-input">
+                    <span id="getcode1" class="ui-code js-getCode2">获取短信验证码</span>
+                </div>
+                <div class="layui-form ui-check">
+                    <input id="ischeck" datatype="*" onkeyup="this.value=this.value.replace(/\s+/g,'')" errormsg="请同意使用协议！" nullmsg="请同意使用协议！" type="checkbox" name=""
+                           lay-skin="primary" checked="checked">
+                    <p>我已同意<a th:href="'javascript:showAgreement()'">《平台用户协议》</a></p>
+                </div>
+                <input name="userType" style="display: none" th:value="1"/>
+                <input name="channelType" style="display: none" th:value="1"/>
+                <a class="ui-register-btn"
+                   th:href="'javascript:validSmsCode2();'">同意并注册</a>
+            </div>
+        </form>
+    </div>
+
+</div>
+	<style>
+	       .ui-protocol-box{
+	           padding: 20px;
+	       }
+	       *{
+	           margin: 0;
+	           padding: 0;
+	       }
+	       h1{
+	           font-size: 28px;
+	           text-align: center;
+	       }
+	       h3{
+	           font-size: 16px;
+	           margin-top: 15px;
+	       }
+	       p{
+	           font-size: 14px;
+	           line-height: 32px;
+	       }
+	   </style>
+    <div class="ui-protocol-box" style="display: none;">
+        <h1><a id="_0"></a>注册协议</h1>
+        <p>提示条款：<br/>
+            企伴侣企业服务平台是甲方建设运营为企业提供整合化、多样化、互联网化的费用控制、发放的软件平台。企业可通过企伴侣企业服务平台向平台合作商家采购优质商品及服务。乙方拟注册成为甲方企伴侣软件平台用户，与平台合作商家进行采购合作。甲、乙双方本着自愿、平等、公平、诚实、信用的原则，经友好协商，根据中华人民共和国合
+            同法及相关法律、法规的规定签订本协议，由双方共同遵守。</p>
+        <h3><a id="_4"></a>一、定义</h3>
+        <p>甲方定义：企伴侣企业服务平台建设运营方。<br/> 乙方定义：注册并使用企伴侣企业服务平台相关产品及服务方。<br/> 企伴侣积分（以下简称“积分”）为甲方对接多家顶级商家信息开发的单用途积分。自开通充值日起即可使用，无有效期限。
+        </p>
+        <h3><a id="_9"></a>二、合作方式</h3>
+        <p>甲方有权通过其合作商户向乙方出售积分，乙方同意通过甲方合作商户采购甲方的积分。乙方同意通过登录平台使用费控软件。</p>
+        <h3><a id="_12"></a>三、合作期限</h3>
+        <p>合同有效期为自合同签订之日起三年。</p>
+        <h3><a id="_15"></a>四、甲乙双方的权利与义务</h3>
+        <p>1、甲方负责企伴侣企业服务平台积分的销售和运营。<br/> 2、乙方采购积分时，甲方不收取乙方的采购款项，由乙方直接付款至订单归属的甲方合作商户。<br/>
+            3、乙方在甲方软件平台成功注册后，可通过平台购买积分。乙方根据用途和所需票据项目、金额等形成采购订单。<br/>
+            4、乙方采购甲方的积分，成功支付订单采购款后，不能以任何理由取消订单。积分一经售出，使用范围、充值数额不可更改；可不限额、不限人次、不限次数使用。<br/>
+            5、甲方合作商户企伴侣软件确认采购订单后，乙方根据订单信息安排向所选商户进行一对一付款。<br/> 6、甲方合作商户确认收款到账后。将平台积分充入乙方企业账户，乙方可在线完成发放对象的账户开通、充值。<br/>
+            7、乙方企业账户收到积分后，乙方无权从所付款的甲方合作商家另行获取积分或其他权益。<br/>
+            8、因乙方充值或分发时信息错误等非甲方原因，而导致积分开户充值错误，且被他人使用，甲方不承担任何责任。如因甲方原因导致积分账户被他人使用的，甲方承担赔偿责任。<br/>
+            9、因任何原因，乙方用户所提供的手机号码在运营商处于无法接受信息的状态的，由此造成的未通知或延迟通知，甲方不负担相应责任。乙方用户反馈问题至甲方后，甲方将负责协调解决短信通知问题。<br/> 10、
+            乙方在通用电子消费券企业账户后台，可查看积分采购和发放记录。<br/> 11、 如甲方因合作商户要求，乙方需提供甲方指定服务人员发票开具等相关操作授权及企业营业执照等加盖公章的相关材料复印件。<br/> 12、
+            甲方合作商户收到乙方付款后，开具乙方订单发票。乙方收到发票核对无误后，提供甲方纸质或图片形式的发票签收单。因乙方原因造成发票的抬头或金额错误的，甲方协调合作商户换开，相应责任由乙方承担。<br/> 13、
+            乙方采购甲方企伴侣平台积分属乙方自主行为，因乙方不正当使用而产生的相关责任与甲方无关。</p>
+        <h3><a id="_30"></a>五、商业秘密和保密条款</h3>
+        <p>1、本协议以及双方根据本协议提供的信息均为保密信息，保密信息的接收方保证对上述保密信息采取严格的保密措施，且仅用于本协议的目的。接受方除按照法律、法规要求及双方约定项目必须对外披露外，不得向任何第三方披露。<br/>
+            2、甲乙双方应对其通过工作接触和通过其他渠道得知的有关对方的商业秘密严格保密，包括人员信息、人员身份信息、采购商品信息等，未经对方事先书面同意，不得自己使用或向第三方披露。保密条款不因本协议的解除或终止而失去效力。<br/>
+            3、除本协议规定外，未经对方事先书面同意，双方不得擅自使用、允许他人使用、复制对方的商标、标志、产品、技术及其他资料。</p>
+        <h3><a id="_35"></a>六、违约责任</h3>
+        <p>1、在合作期间，任何一方违反本协议约定的，守约方有权解除本协议，守约方有权同时要求违约方赔偿相应的损失包括但不限于诉讼费、调查取证费、律师费等。<br/>
+            2、若因国家政策或法律、法规、规范性文件在本协议签订后发生重大调整而直接影响本协议的履行或者导致一方不能按约履行本协议时，该方无过错的，不视为该方违反本协议。按该事件对本协议履行影响的程度，由双方协商决定是否延期履行本协议或者解除本协议。
+        </p>
+        <h3><a id="_39"></a>七、合作终止</h3>
+        <p>合作期满双方均不延续合作时，本协议自动终止。</p>
+        <h3><a id="_42"></a>八、排他条款</h3>
+        <p>出于保护甲方商业模式目的，本合同有效期内，乙方不得与甲方同性质、同业务领域的第三方进行相同或类似的合作。</p>
+        <h3><a id="_45"></a>九、不可抗力</h3>
+        <p>1、
+            本协议所称不可抗力是指受不可抗力影响一方不能合理控制的、无法预料或即使可预料到也不可避免、无法克服，并于本协议签署之后出现的、使该方对本协议全部或部分的履行在客观上成为不可能或不实际的任何事件，包括但不限于水灾、火灾、旱灾、台风、地震及其他自然灾害、罢工、骚动、暴乱及战争等。<br/>
+            2、
+            如因不可抗力事件致使任何一方不能履行或不能完全履行本协议时，该方应立即将该等情况以书面形式通知本协议其他方，在该等情况发生之日起7个工作日内提供详情并明确说明本协议不能履行，或者部分不能履行，或者需要延期履行的理由，并提供有效证明。<br/>
+            3、
+            如因不可抗力事件，一方部分或全部不能履行本协议项下的义务，将不构成本协议第四-1条的违约，相应的履行义务在不可抗力事件妨碍其履行期间中止。不可抗力事件或其影响终止或消除后，该方应立即恢复履行在本协议项下的各项义务。如不可抗力事件及其影响持续30个工作日或以上，并且致使本协议任何一方丧失继续履行本协议的能力，则任何一方有权解除本协议。
+        </p>
+        <h3><a id="_50"></a>十、通知与送达</h3>
+        <p>双方在本合同项下向对方发出的任何通知，对方均应在接受后第一时间内通过适当方式确认送达（签收、电话确认等）；如接受方未予确认时，但发送方能够证明其已发出通知且能够合理推断该等通知已送达时，亦应认定送达。</p>
+        <h3><a id="_53"></a>十一、禁止贿赂条款</h3>
+        <p>
+            1、任何一方保证不向另一方及与本合作有关的任何第三方的雇员或管理、工作人员，直接或间接，在账外暗中支付任何佣金、报酬或给予回扣，或者提供任何礼品或款待，亦不向另一方及与本合作有关的任何第三方雇员或管理、工作人员就述事项达成任何安排，但是按照商业惯例赠送小额广告礼品的除外。<br/>
+            2、若任何一方违反了本条规定，则视为严重违约。守约方有权以书面形式通知违约方单方终止本合同，同时保留依法采取进一步法律措施的权利，违约方应承担由此给守约方带来的一切损失。</p>
+        <h3><a id="_57"></a>十二、争议解决</h3>
+        <p>1、 本协议的效力、解释及履行均适用中国人民共和国法律。<br/> 2、 如果产生有关本协议的存在、效力、履行、解释、终止的争议，双方应通过友好协商解决， 如果争议通过协商不能解决的，甲乙双方均可以向甲方公司所属地人民法院起诉。
+        </p>
+    </div>
+</body>
+</html>

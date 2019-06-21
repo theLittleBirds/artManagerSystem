@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>星梦之声后台管理系统</title>
+    <!--全局公共js-->
+    <script th:src="@{/static/js/global.js}" src="/static/js/global.js"></script>
+    <!--私有css、js-->
+
+</head>
+<body>
+<div class="ui-login-box">
+    <div class="user-header">
+        <div class="user-header-con">
+            <div class="user-header-btn">
+                <span>欢迎来到星梦之声后台管理系统</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui-login-left">
+        <div class="user-header-con">
+            <div class="user-header-btn">
+                <span>logo</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="ui-login-right">
+        <form id="login" method="post" action="/loginForm" class="layui-form js-login-form">
+            <div class="ui-relative">
+                <i class="iconfont">&#xe60b;</i>
+                <input type="text" onkeyup="this.value=this.value.replace(/\s+/g,'')" onblur="checkLoginName()" maxlength="20" id="loginname" name="loginname" placeholder="登录名" class="layui-input"/>
+            </div>
+            <div class="ui-relative">
+                <i class="iconfont">&#xe77d;</i>
+                <input type="password" onkeyup="this.value=this.value.replace(/\s+/g,'')" onblur="checkPassword()" maxlength="20" id="password" name="password" placeholder="密码" class="layui-input"/>
+            </div>
+            <div>
+                <a onclick="submitFun()" class="ui-login-btn">登录</a>
+            </div>
+            <span th:text="${error}" style="color: red"></span>
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>
